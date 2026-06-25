@@ -1,0 +1,31 @@
+{
+  "name": "poc-voice-synth",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "artyom.js": "^1.0.6",
+    "easy-speech": "^2.4.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "speak-tts": "^2.0.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "oxlint": "^1.69.0",
+    "prettier": "^3.8.4",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.0"
+  }
+}

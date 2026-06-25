@@ -1,0 +1,147 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.version {
+  font-size: 0.72rem;
+  font-family: ui-monospace, monospace;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+}
+
+.status {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.idle {
+  background: var(--surface-2);
+  color: var(--text-muted);
+}
+.loading {
+  background: #3a2f00;
+  color: #ffd54a;
+}
+.speaking {
+  background: #0d3b22;
+  color: #4ade80;
+}
+.error {
+  color: var(--danger);
+}
+.status.error {
+  background: #3b0d12;
+  color: #ff6b81;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.repo {
+  font-size: 0.8rem;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.play,
+.stop,
+.debugToggle {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  transition: filter 0.15s ease;
+}
+
+.play {
+  background: var(--accent);
+  color: #06121f;
+  font-weight: 600;
+  border-color: transparent;
+}
+
+.stop {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.play:hover:not(:disabled),
+.stop:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.play:disabled,
+.stop:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.error {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--danger);
+}
+
+.debugToggle {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 0.2rem 0;
+  font-size: 0.8rem;
+}
+
+.debug {
+  margin: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 0.78rem;
+  overflow-x: auto;
+  color: var(--text-muted);
+}
