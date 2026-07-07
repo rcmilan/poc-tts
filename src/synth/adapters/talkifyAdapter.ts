@@ -11,7 +11,8 @@ export const talkifyMeta: SynthMeta = {
   repoUrl: 'https://github.com/Hagsten/Talkify',
 };
 
-const TALKIFY_CDN = 'https://cdn.talkify.net/talkify.js';
+// cdn.talkify.net is dead; jsDelivr mirrors the official npm build (talkify-tts).
+const TALKIFY_CDN = 'https://cdn.jsdelivr.net/npm/talkify-tts@4/dist/talkify.min.js';
 
 /**
  * The real Talkify (Hagsten) is not the `talkify` npm package — that name is a
@@ -63,7 +64,13 @@ export function createTalkifyAdapter(): SynthAdapter {
       try {
         if (typeof player.setRate === 'function') player.setRate(config.rate);
         if (config.voiceURI && typeof player.forceVoice === 'function') {
-          player.forceVoice({ name: config.voiceURI });
+          // forceVoice assigns this object straight to utterance.voice, so it
+          // must be a real SpeechSynthesisVoice — a plain {name} produces
+          // voice-unavailable and silence.
+          const voice = speechSynthesis
+            .getVoices()
+            .find((v) => v.voiceURI === config.voiceURI);
+          if (voice) player.forceVoice(voice);
         }
       } catch {
         /* best-effort configuration; fall back to defaults */

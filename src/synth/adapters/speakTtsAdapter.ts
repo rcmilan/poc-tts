@@ -21,7 +21,9 @@ export function createSpeakTtsAdapter(): SynthAdapter {
 
   async function ensure() {
     if (speech) return;
-    const Speech = (await import('speak-tts')).default as any;
+    // CJS build exposes the class at .default; Vite interop may nest it one level deeper.
+    const mod = (await import('speak-tts')) as any;
+    const Speech = mod.default?.default ?? mod.default ?? mod;
     speech = new Speech();
     if (!speech.hasBrowserSupport()) {
       supported = false;
@@ -62,10 +64,16 @@ export function createSpeakTtsAdapter(): SynthAdapter {
         }
       }
 
+      // speak() only resolves/rejects inside the onend/onerror listeners it
+      // wraps — omit them and the promise hangs forever.
       await speech.speak({
         text,
-        queueMode: 0, // replace anything already queued
-        listeners: { onstart: () => onStart?.() },
+        queue: false, // replace anything already queued
+        listeners: {
+          onstart: () => onStart?.(),
+          onend: () => {},
+          onerror: () => {},
+        },
       });
     },
 

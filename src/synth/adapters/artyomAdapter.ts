@@ -20,7 +20,9 @@ export function createArtyomAdapter(): SynthAdapter {
 
   async function ensure() {
     if (artyom) return;
-    const Artyom = (await import('artyom.js/build/artyom.js')).default as any;
+    // CJS build exposes the class at .default; Vite interop may nest it one level deeper.
+    const mod = (await import('artyom.js/build/artyom.js')) as any;
+    const Artyom = mod.default?.default ?? mod.default ?? mod;
     artyom = new Artyom();
   }
 
