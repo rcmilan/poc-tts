@@ -4,7 +4,9 @@ import type { SpeakRequest, SynthAdapter, SynthMeta, VoiceOption } from '../type
 export const easySpeechMeta: SynthMeta = {
   id: 'easy-speech',
   name: 'EasySpeech',
-  description: 'Cross-browser wrapper around the native Web Speech API with a tiny, typed API.',
+  description:
+    "Thin, well-typed cross-browser wrapper over the browser's built-in Web Speech API. " +
+    'The baseline here: instant, no download, uses your OS voices, full rate/pitch/volume.',
   repoUrl: 'https://github.com/leaonline/easy-speech',
 };
 

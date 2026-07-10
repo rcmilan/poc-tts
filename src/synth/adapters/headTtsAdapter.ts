@@ -7,8 +7,8 @@ export const headTtsMeta: SynthMeta = {
   id: 'headtts',
   name: 'HeadTTS',
   description:
-    'In-browser neural TTS running the same Kokoro-82M model, adding phoneme timestamps and ' +
-    'Oculus visemes for lip-sync. First Play downloads the ~90 MB model (cached afterward).',
+    'Same in-browser Kokoro-82M neural model as Kokoro.js, plus phoneme timestamps and visemes ' +
+    'for avatar lip-sync. Same ~90 MB first-Play download and WASM speed tradeoff.',
   repoUrl: 'https://github.com/met4citizen/HeadTTS',
 };
 

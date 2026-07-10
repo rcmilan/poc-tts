@@ -4,7 +4,9 @@ import type { SpeakRequest, SynthAdapter, SynthMeta, VoiceOption } from '../type
 export const speakTtsMeta: SynthMeta = {
   id: 'speak-tts',
   name: 'Speak-TTS',
-  description: 'Promise-based Web Speech API wrapper with simple setVoice / setRate helpers.',
+  description:
+    'Promise-based Web Speech wrapper. Same OS voices as EasySpeech, but adds automatic ' +
+    'sentence-splitting for long text; full rate/pitch/volume.',
   repoUrl: 'https://github.com/tom-s/speak-tts',
 };
 

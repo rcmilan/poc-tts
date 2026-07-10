@@ -6,8 +6,8 @@ export const talkifyMeta: SynthMeta = {
   id: 'talkify',
   name: 'Talkify',
   description:
-    'Talkify by Hagsten, running in its browser (Html5) mode on top of Web Speech — no API key. ' +
-    'Premium cloud neural voices exist but require a key and are out of scope here.',
+    "Web Speech in Talkify's free 'Html5' mode: OS voices, rate only (no pitch/volume). Its real " +
+    'draw is premium cloud neural voices, but those need an API key and are out of scope here.',
   repoUrl: 'https://github.com/Hagsten/Talkify',
 };
 

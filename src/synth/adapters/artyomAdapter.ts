@@ -5,9 +5,9 @@ export const artyomMeta: SynthMeta = {
   id: 'artyom',
   name: 'Artyom.js',
   description:
-    'Older voice-assistant wrapper over Web Speech. Natively it picks a voice by language ' +
-    '(e.g. en-GB always maps to its hardcoded "UK English Male"), so this adapter overrides that ' +
-    'to honor the specific voice you select. Speed and volume only — no pitch.',
+    'Voice-assistant library (also does speech recognition/commands) with Web Speech TTS bolted ' +
+    'on. OS voices, no pitch — and it natively forces one voice per language, so this adapter ' +
+    'overrides that to respect the voice you pick.',
   repoUrl: 'https://github.com/sdkcarlos/artyom.js',
 };
 

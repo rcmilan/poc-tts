@@ -8,8 +8,9 @@ export const kokoroMeta: SynthMeta = {
   id: 'kokoro',
   name: 'Kokoro.js',
   description:
-    'Neural TTS (Kokoro-82M) running fully in-browser via transformers.js + ONNX (WASM). ' +
-    'First Play downloads the ~90 MB model from Hugging Face (cached afterward).',
+    'Neural TTS running Kokoro-82M fully in-browser (transformers.js + ONNX/WASM). Far more ' +
+    'natural than the OS voices, with its own curated voice set — but downloads ~90 MB on first ' +
+    'Play (cached after) and runs slower on the CPU.',
   repoUrl: 'https://github.com/hexgrad/kokoro',
 };
 
