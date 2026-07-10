@@ -1,5 +1,6 @@
 import { createAudioPlayer } from '../audioPlayer';
 import { KOKORO_VOICES } from '../kokoroVoices';
+import { createLru } from '../lru';
 import type { SpeakRequest, SynthAdapter, SynthMeta, VoiceOption } from '../types';
 
 export const headTtsMeta: SynthMeta = {
@@ -24,6 +25,7 @@ const DICTIONARY_URL = new URL(`${import.meta.env.BASE_URL}headtts/dictionaries`
 
 export function createHeadTtsAdapter(): SynthAdapter {
   const player = createAudioPlayer();
+  const cache = createLru<AudioBuffer[]>();
   // HeadTTS ships no types; kept behind `any` like the other untyped adapters.
   let engine: any = null;
   let connecting: Promise<any> | null = null;
@@ -66,20 +68,28 @@ export function createHeadTtsAdapter(): SynthAdapter {
     },
 
     async speak({ text, config }: SpeakRequest, onStart?: () => void) {
-      const h = await ensure();
-      h.setup({
-        voice: config.voiceURI ?? 'af_bella',
-        language: 'en-us',
-        speed: config.rate,
-        audioEncoding: 'wav',
-      });
-      // Awaiting resolves with all audio messages; long text is split into
-      // sentence chunks that we play back in order.
-      const messages = await h.synthesize({ input: text });
+      const voice = config.voiceURI ?? 'af_bella';
+      // Volume is applied at playback, so it stays out of the key.
+      const key = `${voice}|${config.rate}|${text}`;
+      let buffers = cache.get(key);
+      if (!buffers) {
+        const h = await ensure();
+        h.setup({ voice, language: 'en-us', speed: config.rate, audioEncoding: 'wav' });
+        // Awaiting resolves with all audio messages; long text is split into
+        // sentence chunks that we play back in order.
+        const messages = await h.synthesize({ input: text });
+        const produced: AudioBuffer[] = messages
+          .filter(
+            (m: { type: string; data?: { audio?: AudioBuffer } }) =>
+              m.type === 'audio' && m.data?.audio,
+          )
+          .map((m: { data: { audio: AudioBuffer } }) => m.data.audio);
+        cache.set(key, produced);
+        buffers = produced;
+      }
       let started = false;
-      for (const m of messages) {
-        if (m.type !== 'audio' || !m.data?.audio) continue;
-        await player.play(m.data.audio as AudioBuffer, config.volume, () => {
+      for (const buf of buffers) {
+        await player.play(buf, config.volume, () => {
           if (!started) {
             started = true;
             onStart?.();
