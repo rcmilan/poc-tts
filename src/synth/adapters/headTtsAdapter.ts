@@ -38,6 +38,10 @@ export function createHeadTtsAdapter(): SynthAdapter {
           languages: ['en-us'],
           workerModule: WORKER_MODULE,
           dictionaryURL: DICTIONARY_URL,
+          // HeadTTS defaults the WASM path to q4, whose Kokoro quantization
+          // produces static/buzz. Use q8 (what the Kokoro.js adapter uses);
+          // WebGPU already defaults to fp32.
+          dtypeWasm: 'q8',
         });
         await h.connect();
         engine = h;
