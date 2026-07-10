@@ -63,7 +63,6 @@ export function createHeadTtsAdapter(): SynthAdapter {
       rate: true,
       pitch: false,
       volume: true,
-      pan: true,
       tone: true,
     },
 
@@ -96,7 +95,7 @@ export function createHeadTtsAdapter(): SynthAdapter {
         buffers = produced;
       }
       let started = false;
-      const fx = { volume: config.volume, pan: config.pan, tone: config.tone };
+      const fx = { volume: config.volume, tone: config.tone };
       for (const buf of buffers) {
         await player.play(buf, fx, () => {
           if (!started) {

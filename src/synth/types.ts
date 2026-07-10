@@ -18,8 +18,6 @@ export interface SynthConfig {
   pitch: number;
   /** Volume. 0–1. */
   volume: number;
-  /** Stereo pan, -1 (left) … 0 (center) … 1 (right). Playback-layer effect. */
-  pan: number;
   /** Tone tilt, -1 (darker) … 0 (flat) … 1 (brighter). Playback-layer effect. */
   tone: number;
 }
@@ -64,8 +62,7 @@ export interface SynthAdapter {
     rate: boolean;
     pitch: boolean;
     volume: boolean;
-    /** Playback-layer effects — true only for engines that route through our Web Audio player. */
-    pan: boolean;
+    /** Playback-layer effect — true only for engines that route through our Web Audio player. */
     tone: boolean;
   };
 }

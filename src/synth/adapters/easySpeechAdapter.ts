@@ -35,7 +35,6 @@ export function createEasySpeechAdapter(): SynthAdapter {
       rate: true,
       pitch: true,
       volume: true,
-      pan: false,
       tone: false,
     },
 

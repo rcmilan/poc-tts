@@ -7,7 +7,6 @@ interface Supports {
   rate: boolean;
   pitch: boolean;
   volume: boolean;
-  pan: boolean;
   tone: boolean;
 }
 
@@ -101,18 +100,6 @@ export function Controls({
           step={0.05}
           disabled={disabled}
           onChange={(volume) => onChange({ volume })}
-        />
-      )}
-
-      {supports.pan && (
-        <Slider
-          label="Pan"
-          value={config.pan}
-          min={-1}
-          max={1}
-          step={0.1}
-          disabled={disabled}
-          onChange={(pan) => onChange({ pan })}
         />
       )}
 

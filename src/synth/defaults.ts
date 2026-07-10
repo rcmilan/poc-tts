@@ -6,7 +6,6 @@ export const DEFAULT_CONFIG: SynthConfig = {
   rate: 1,
   pitch: 1,
   volume: 1,
-  pan: 0,
   tone: 0,
 };
 

@@ -33,7 +33,6 @@ export function createArtyomAdapter(): SynthAdapter {
       rate: true,
       pitch: false,
       volume: true,
-      pan: false,
       tone: false,
     },
 

@@ -37,7 +37,6 @@ export function createKokoroAdapter(): SynthAdapter {
       rate: true,
       pitch: false,
       volume: true,
-      pan: true,
       tone: true,
     },
 
@@ -61,11 +60,7 @@ export function createKokoroAdapter(): SynthAdapter {
         blob = audio.toBlob();
         cache.set(key, blob);
       }
-      await player.play(
-        blob,
-        { volume: config.volume, pan: config.pan, tone: config.tone },
-        onStart,
-      );
+      await player.play(blob, { volume: config.volume, tone: config.tone }, onStart);
     },
 
     stop() {

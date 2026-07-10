@@ -52,7 +52,6 @@ export function createTalkifyAdapter(): SynthAdapter {
       rate: true,
       pitch: false,
       volume: false,
-      pan: false,
       tone: false,
     },
 
