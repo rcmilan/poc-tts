@@ -31,7 +31,15 @@ export function createKokoroAdapter(): SynthAdapter {
   }
 
   return {
-    supports: { voice: true, langAsVoice: false, rate: true, pitch: false, volume: true },
+    supports: {
+      voice: true,
+      langAsVoice: false,
+      rate: true,
+      pitch: false,
+      volume: true,
+      pan: true,
+      tone: true,
+    },
 
     async load() {
       // no-op: defer the model download to the first Play.
@@ -53,7 +61,11 @@ export function createKokoroAdapter(): SynthAdapter {
         blob = audio.toBlob();
         cache.set(key, blob);
       }
-      await player.play(blob, config.volume, onStart);
+      await player.play(
+        blob,
+        { volume: config.volume, pan: config.pan, tone: config.tone },
+        onStart,
+      );
     },
 
     stop() {

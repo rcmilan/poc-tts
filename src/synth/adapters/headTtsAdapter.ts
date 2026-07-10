@@ -57,7 +57,15 @@ export function createHeadTtsAdapter(): SynthAdapter {
   }
 
   return {
-    supports: { voice: true, langAsVoice: false, rate: true, pitch: false, volume: true },
+    supports: {
+      voice: true,
+      langAsVoice: false,
+      rate: true,
+      pitch: false,
+      volume: true,
+      pan: true,
+      tone: true,
+    },
 
     async load() {
       // no-op: defer the model download to the first Play.
@@ -88,8 +96,9 @@ export function createHeadTtsAdapter(): SynthAdapter {
         buffers = produced;
       }
       let started = false;
+      const fx = { volume: config.volume, pan: config.pan, tone: config.tone };
       for (const buf of buffers) {
-        await player.play(buf, config.volume, () => {
+        await player.play(buf, fx, () => {
           if (!started) {
             started = true;
             onStart?.();

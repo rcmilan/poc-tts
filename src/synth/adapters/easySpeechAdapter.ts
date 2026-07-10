@@ -29,7 +29,15 @@ export function createEasySpeechAdapter(): SynthAdapter {
   }
 
   return {
-    supports: { voice: true, langAsVoice: false, rate: true, pitch: true, volume: true },
+    supports: {
+      voice: true,
+      langAsVoice: false,
+      rate: true,
+      pitch: true,
+      volume: true,
+      pan: false,
+      tone: false,
+    },
 
     async load() {
       await ensure();

@@ -46,7 +46,15 @@ export function createTalkifyAdapter(): SynthAdapter {
   }
 
   return {
-    supports: { voice: true, langAsVoice: false, rate: true, pitch: false, volume: false },
+    supports: {
+      voice: true,
+      langAsVoice: false,
+      rate: true,
+      pitch: false,
+      volume: false,
+      pan: false,
+      tone: false,
+    },
 
     async load() {
       await ensure();
@@ -67,9 +75,7 @@ export function createTalkifyAdapter(): SynthAdapter {
           // forceVoice assigns this object straight to utterance.voice, so it
           // must be a real SpeechSynthesisVoice — a plain {name} produces
           // voice-unavailable and silence.
-          const voice = speechSynthesis
-            .getVoices()
-            .find((v) => v.voiceURI === config.voiceURI);
+          const voice = speechSynthesis.getVoices().find((v) => v.voiceURI === config.voiceURI);
           if (voice) player.forceVoice(voice);
         }
       } catch {

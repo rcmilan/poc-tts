@@ -27,7 +27,15 @@ export function createArtyomAdapter(): SynthAdapter {
   }
 
   return {
-    supports: { voice: false, langAsVoice: true, rate: true, pitch: false, volume: true },
+    supports: {
+      voice: false,
+      langAsVoice: true,
+      rate: true,
+      pitch: false,
+      volume: true,
+      pan: false,
+      tone: false,
+    },
 
     async load() {
       await ensure();

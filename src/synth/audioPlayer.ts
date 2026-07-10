@@ -36,20 +36,32 @@ export function createAudioPlayer() {
 
   async function play(
     source: Blob | AudioBuffer,
-    volume: number,
+    opts: { volume: number; pan?: number; tone?: number },
     onStart?: () => void,
   ): Promise<void> {
+    const { volume, pan = 0, tone = 0 } = opts;
     const c = audioCtx();
     if (c.state === 'suspended') await c.resume();
     const buffer =
       source instanceof AudioBuffer ? source : await c.decodeAudioData(await source.arrayBuffer());
     stop();
 
-    const gain = c.createGain();
-    gain.gain.value = volume;
     const node = c.createBufferSource();
     node.buffer = buffer;
-    node.connect(gain).connect(c.destination);
+
+    // source -> tone (high-shelf tilt) -> pan -> volume -> out
+    const filter = c.createBiquadFilter();
+    filter.type = 'highshelf';
+    filter.frequency.value = 2000;
+    filter.gain.value = Math.max(-1, Math.min(1, tone)) * 12; // ±12 dB
+
+    const panner = c.createStereoPanner();
+    panner.pan.value = Math.max(-1, Math.min(1, pan));
+
+    const gain = c.createGain();
+    gain.gain.value = volume;
+
+    node.connect(filter).connect(panner).connect(gain).connect(c.destination);
     current = node;
 
     await new Promise<void>((resolve) => {
