@@ -1,4 +1,8 @@
 import { createArtyomAdapter, artyomMeta } from './adapters/artyomAdapter';
+import {
+  createCapacitorSpeechAdapter,
+  capacitorSpeechMeta,
+} from './adapters/capacitorSpeechAdapter';
 import { createEasySpeechAdapter, easySpeechMeta } from './adapters/easySpeechAdapter';
 import { createHeadTtsAdapter, headTtsMeta } from './adapters/headTtsAdapter';
 import { createKokoroAdapter, kokoroMeta } from './adapters/kokoroAdapter';
@@ -22,6 +26,7 @@ const VERSIONS: Record<string, string> = {
   talkify: 'cdn (latest)',
   kokoro: '1.2.1',
   headtts: '1.3.0',
+  'capacitor-speech-synthesis': '8.0.20',
 };
 
 function withVersion(meta: SynthMeta): SynthMeta {
@@ -36,4 +41,8 @@ export const SYNTHS: SynthEntry[] = [
   { meta: withVersion(talkifyMeta), createAdapter: createTalkifyAdapter },
   { meta: withVersion(kokoroMeta), createAdapter: createKokoroAdapter },
   { meta: withVersion(headTtsMeta), createAdapter: createHeadTtsAdapter },
+  {
+    meta: withVersion(capacitorSpeechMeta),
+    createAdapter: createCapacitorSpeechAdapter,
+  },
 ];

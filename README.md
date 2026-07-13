@@ -6,12 +6,13 @@ Built with **Vite + React + TypeScript** and **pnpm**.
 
 ## Libraries compared
 
-| Section | Library | Mode here | Notes |
-| --- | --- | --- | --- |
-| EasySpeech | [`easy-speech`](https://github.com/leaonline/easy-speech) | Web Speech | Modern, typed wrapper around the native Web Speech API. Supports voice, rate, pitch, volume. |
-| Speak-TTS | [`speak-tts`](https://github.com/tom-s/speak-tts) | Web Speech | Promise-based Web Speech wrapper. Selects voices by name. Supports voice, rate, pitch, volume. |
-| Artyom.js | [`artyom.js`](https://github.com/sdkcarlos/artyom.js) | Web Speech | Older assistant library. Selects voices **by language**, honors rate/volume (no pitch). |
-| Talkify | [`Talkify`](https://github.com/Hagsten/Talkify) | Browser (Html5) | Loaded from the Talkify **CDN**; runs on Web Speech. Supports voice + rate. |
+| Section                    | Library                                                                                     | Mode here             | Notes                                                                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| EasySpeech                 | [`easy-speech`](https://github.com/leaonline/easy-speech)                                   | Web Speech            | Modern, typed wrapper around the native Web Speech API. Supports voice, rate, pitch, volume.                                                |
+| Speak-TTS                  | [`speak-tts`](https://github.com/tom-s/speak-tts)                                           | Web Speech            | Promise-based Web Speech wrapper. Selects voices by name. Supports voice, rate, pitch, volume.                                              |
+| Artyom.js                  | [`artyom.js`](https://github.com/sdkcarlos/artyom.js)                                       | Web Speech            | Older assistant library. Selects voices **by language**, honors rate/volume (no pitch).                                                     |
+| Talkify                    | [`Talkify`](https://github.com/Hagsten/Talkify)                                             | Browser (Html5)       | Loaded from the Talkify **CDN**; runs on Web Speech. Supports voice + rate.                                                                 |
+| Capacitor Speech Synthesis | [`@capgo/capacitor-speech-synthesis`](https://github.com/Cap-go/capacitor-speech-synthesis) | Web Speech (fallback) | Capacitor plugin: native TTS on iOS/Android, Web Speech on the web. Event-based (start/end/error) API; supports voice, rate, pitch, volume. |
 
 ## Design notes
 
@@ -31,14 +32,14 @@ Then open the printed local URL (default http://localhost:5173).
 
 ### Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start the Vite dev server. |
-| `pnpm build` | Type-check and build for production. |
-| `pnpm preview` | Preview the production build. |
-| `pnpm lint` | Run oxlint. |
-| `pnpm format` | Format with Prettier. |
-| `pnpm format:check` | Check formatting without writing. |
+| Command             | Description                          |
+| ------------------- | ------------------------------------ |
+| `pnpm dev`          | Start the Vite dev server.           |
+| `pnpm build`        | Type-check and build for production. |
+| `pnpm preview`      | Preview the production build.        |
+| `pnpm lint`         | Run oxlint.                          |
+| `pnpm format`       | Format with Prettier.                |
+| `pnpm format:check` | Check formatting without writing.    |
 
 ## Project structure
 
@@ -62,6 +63,7 @@ src/
 - Audio playback requires a user gesture in most browsers; just click **Play**.
 
 ### Alternativas
+
 - https://www.assemblyai.com
 - https://deepgram.com
 - https://elevenlabs.io
